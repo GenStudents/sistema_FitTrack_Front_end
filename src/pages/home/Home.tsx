@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { buscar } from "../../services/Service"
+import type Plano from "../../models/Plano"
+import type Categoria from "../../models/Categoria"
 
 
 function Home() {
-  const [totalPlanos, setTotalPlanos] = useState<number>(0)
-  const [totalTreinos, setTotalTreinos] = useState<number>(0)
+  const [planos, setPlanos] = useState<Plano[]>([])
+  const [treinos, setTreinos] = useState<Categoria[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const planos = await api.get("/planos")
-        const treinos = await api.get("/treinos")
+  async function fetchData() {
+    try {
+      await buscar("/planos", setPlanos)
+      await buscar("/categorias-treino", setTreinos)
 
-        setTotalPlanos(planos.data.length)
-        setTotalTreinos(treinos.data.length)
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error)
-      } finally {
-        setLoading(false)
-      }
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error)
+    } finally {
+      setLoading(false)
     }
-
+  }
+  
+  useEffect(() => {
     fetchData()
   }, [])
 
@@ -44,7 +45,7 @@ function Home() {
             <p>Carregando...</p>
           ) : (
             <p className="text-3xl font-bold text-blue-600">
-              {totalPlanos}
+              {planos.length}
             </p>
           )}
         </div>
@@ -55,7 +56,7 @@ function Home() {
             <p>Carregando...</p>
           ) : (
             <p className="text-3xl font-bold text-green-600">
-              {totalTreinos}
+              {treinos.length}
             </p>
           )}
         </div>
