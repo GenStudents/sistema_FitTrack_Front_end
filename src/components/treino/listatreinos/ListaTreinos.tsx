@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { Search, Plus } from "lucide-react"
+import { Search, Plus, X } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import type { Treino } from "../../../models/Treino"
 import { buscar } from "../../../services/Service"
 import CardTreino from "../cardtreino/CardTreino"
+import FormTreino from "../formtreino/FormTreino"
 
 
 export default function ListarTreinos() {
@@ -12,6 +13,7 @@ export default function ListarTreinos() {
   const [treinos, setTreinos] = useState<Treino[]>([])
   const [buscaNome, setBuscaNome] = useState("")
   const [nivelFiltro, setNivelFiltro] = useState("")
+  const [isModalAberto, setIsModalAberto] = useState(false);
 
   // Função que busca todos os treinos
   async function buscarTreinos() {
@@ -53,9 +55,8 @@ export default function ListarTreinos() {
 
         {/* Botão Novo Treino */}
         <button
-          onClick={() => navigate("/cadastrarTreino")}
-          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-black px-4 py-2 rounded-xl font-medium transition-all shadow-md hover:shadow-lg"
-        >
+          onClick={() => setIsModalAberto(true)} // Abre o modal ao clicar
+          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-black px-4 py-2 rounded-xl font-medium transition-all shadow-md hover:shadow-lg">
           <Plus size={18} strokeWidth={2.5} />
           Novo Treino
         </button>
@@ -92,8 +93,6 @@ export default function ListarTreinos() {
       {/* Listagem */}
 
       {treinosFiltrados.length === 0 ? (
-
-        // Caso não exista nenhum treino após filtro
         <div className="text-center text-zinc-400 mt-20">
           Nenhum treino encontrado.
         </div>
@@ -115,6 +114,31 @@ export default function ListarTreinos() {
 
           ))}
 
+        </div>
+      )}
+
+      {/* MODAL DE CADASTRO */}
+      {isModalAberto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
+          
+          {/* Container do Modal */}
+          <div className="bg-[#0c0c0e] border border-zinc-800 w-full max-w-lg rounded-2xl shadow-2xl relative animate-in zoom-in-95 duration-200">
+            
+            {/* Header do Modal */}
+            <button 
+                onClick={() => setIsModalAberto(false)}
+                className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors p-1"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="p-8 max-h-[90vh] overflow-y-auto">
+                <h2 className="text-xl font-bold text-white mb-2">Novo Plano de Treino</h2>
+                <p className="text-zinc-400 text-sm mb-8">Preencha os dados para criar um novo treino.</p>
+        
+        <FormTreino onClose={() => setIsModalAberto(false)} />
+            </div>
+          </div>
         </div>
       )}
     </div>
