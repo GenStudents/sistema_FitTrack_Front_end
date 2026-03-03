@@ -9,7 +9,6 @@ import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
 import { atualizar, cadastrar } from "../../../services/Service";
 
-// 🔥 PROPS DO MODAL
 interface FormCategoriaProps {
   categoriaInicial?: Categoria | null;
   fecharModal: () => void;
@@ -20,17 +19,22 @@ function FormCategoria({
   fecharModal
 }: FormCategoriaProps) {
 
-  // 🔥 se for nova categoria começa vazio
+  // ✅ estado inicial seguro
   const [categoria, setCategoria] = useState<Categoria>(
-    categoriaInicial ?? ({} as Categoria)
+    categoriaInicial ?? {
+      id: 0,
+      descricao: ""
+    }
   );
 
   const [isLoading, setIsLoading] = useState(false);
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
     setCategoria({
       ...categoria,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   }
 
@@ -40,23 +44,21 @@ function FormCategoria({
 
     try {
 
-      // 🔥 EDITAR
-      if (categoria.id) {
+      // ✅ EDITAR
+      if (categoria.id && categoria.id !== 0) {
         await atualizar(
           "/categorias-treino",
           categoria,
-          () => {},
-          {}
+          () => {}
         );
       }
 
-      // 🔥 NOVA CATEGORIA
+      // ✅ NOVA CATEGORIA
       else {
         await cadastrar(
           "/categorias-treino",
           categoria,
-          () => {},
-          {}
+          () => {}
         );
       }
 
@@ -71,11 +73,12 @@ function FormCategoria({
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
 
-      {/* CARD */}
       <div className="bg-zinc-900 rounded-2xl p-6 w-[500px]">
 
         <h1 className="text-3xl text-white text-center mb-6">
-          {categoria.id ? "Editar Categoria" : "Nova Categoria"}
+          {categoria.id && categoria.id !== 0
+            ? "Editar Categoria"
+            : "Nova Categoria"}
         </h1>
 
         <form
@@ -92,8 +95,9 @@ function FormCategoria({
               type="text"
               name="descricao"
               className="border border-zinc-700 bg-zinc-800 text-white rounded p-2"
-              value={categoria.descricao || ""}
+              value={categoria.descricao}
               onChange={atualizarEstado}
+              required
             />
           </div>
 
@@ -109,7 +113,7 @@ function FormCategoria({
 
             <button
               type="submit"
-              className="w-full py-2 rounded bg-emerald-500 hover:bg-emerald-600 text-black font-semibold flex justify-center"
+              className="w-full py-2 rounded bg-emerald-500 hover:bg-emerald-600 text-black font-semibold flex justify-center items-center"
             >
               {isLoading ? (
                 <ClipLoader color="#000" size={20} />

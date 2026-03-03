@@ -13,14 +13,12 @@ function ListaCategoria() {
   const [isLoading, setIsLoading] = useState(false);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-  // modais
   const [modalEditar, setModalEditar] = useState(false);
   const [modalDeletar, setModalDeletar] = useState(false);
 
   const [categoriaSelecionada, setCategoriaSelecionada] =
     useState<Categoria | null>(null);
 
-  // carregar lista só 1x
   useEffect(() => {
     buscarCategorias();
   }, []);
@@ -29,38 +27,34 @@ function ListaCategoria() {
     try {
       setIsLoading(true);
 
+      // ✅ CORREÇÃO AQUI
       await buscar(
         "/categorias-treino",
-        setCategorias,
-        {}
+        setCategorias
       );
 
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao buscar categorias:", error);
     } finally {
       setIsLoading(false);
     }
   }
 
-  // 🔥 NOVA CATEGORIA
   function abrirModalNovaCategoria() {
     setCategoriaSelecionada(null);
     setModalEditar(true);
   }
 
-  // 🔥 EDITAR
   function abrirEditar(categoria: Categoria) {
     setCategoriaSelecionada(categoria);
     setModalEditar(true);
   }
 
-  // 🔥 DELETAR
   function abrirDeletar(categoria: Categoria) {
     setCategoriaSelecionada(categoria);
     setModalDeletar(true);
   }
 
-  // 🔥 FECHAR TODOS MODAIS
   function fecharModais() {
     setModalEditar(false);
     setModalDeletar(false);
@@ -70,7 +64,6 @@ function ListaCategoria() {
 
   return (
     <>
-
       {isLoading && (
         <div className="flex justify-center w-full my-8">
           <SyncLoader color="#10b981" size={12} />
@@ -80,13 +73,13 @@ function ListaCategoria() {
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col">
 
-          {/* HEADER */}
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-4xl font-bold text-white">
               Categorias de Treino
             </h1>
 
             <button
+              type="button"
               onClick={abrirModalNovaCategoria}
               className="
                 bg-emerald-500
@@ -124,7 +117,6 @@ function ListaCategoria() {
         </div>
       </div>
 
-      {/* MODAL EDITAR / NOVA */}
       {modalEditar && (
         <FormCategoria
           categoriaInicial={categoriaSelecionada}
@@ -132,7 +124,6 @@ function ListaCategoria() {
         />
       )}
 
-      {/* MODAL DELETAR */}
       {modalDeletar && categoriaSelecionada && (
         <DeletarCategoria
           categoria={categoriaSelecionada}
