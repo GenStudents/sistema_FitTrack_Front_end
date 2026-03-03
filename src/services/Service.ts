@@ -1,6 +1,6 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const api = axios.create({
-//   baseURL: 'https://blogpessoal.onrender.com'
-// })
+export const api = axios.create({
+  baseURL: 'https://projeto-2-fittrack.onrender.com/'
+ })
 
