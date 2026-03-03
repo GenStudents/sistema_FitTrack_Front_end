@@ -1,7 +1,11 @@
 import axios from "axios";
 
+// export const api = axios.create({
+//   baseURL: "https://projeto-2-fittrack.onrender.com"
+// });
+
 export const api = axios.create({
-  baseURL: "https://projeto-2-fittrack.onrender.com"
+  baseURL: import.meta.env.VITE_API_URL
 });
 
 export const cadastrarUsuario = async (
