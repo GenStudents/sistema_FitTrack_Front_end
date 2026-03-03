@@ -66,11 +66,11 @@ export default function ListarTreinos() {
       <div className="flex flex-col md:flex-row gap-4 mb-8">
 
         {/* Campo de busca */}
-        <div className="flex items-center bg-zinc-900 px-4 py-2 rounded-lg w-full md:w-80 border border-zinc-800">
+        <div className="flex items-center bg-zinc-950 px-4 py-2 rounded-lg w-full md:w-80 border border-zinc-800">
           <Search size={18} className="mr-2 text-zinc-400" />
           <input
             type="text"
-            placeholder="Buscar por nome..."
+            placeholder="Buscar por planos..."
             className="bg-transparent outline-none w-full text-sm"
             value={buscaNome}
             onChange={(e) => setBuscaNome(e.target.value)}
@@ -79,7 +79,7 @@ export default function ListarTreinos() {
 
         {/* Filtro por nível */}
         <select
-          className="bg-zinc-900 px-4 py-2 rounded-lg border border-zinc-800 text-sm"
+          className="bg-zinc-950 px-4 py-2 rounded-lg border border-zinc-800 text-sm"
           value={nivelFiltro}
           onChange={(e) => setNivelFiltro(e.target.value)}
         >
