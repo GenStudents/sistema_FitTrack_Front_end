@@ -1,20 +1,24 @@
 import { Link } from "react-router-dom";
+import type Planos from "../../../models/Planos";
 
+interface CardPlanoProps{
+  planos:Planos
+}
 
-function CardPlanos() {
+function CardPlanos({planos}:CardPlanoProps) {
 
   return (
    <div className='border flex flex-col rounded-2xl overflow-hidden justify-between bg-[#0e0f12] '>
            
           <div className="flex items-center bg-[#0e0f12]  justify-between p-3">
             <h3 className='py-2 px-6 text-white font-bold '>
-                Treino Full Body
+                {planos.nome}
             </h3>
-            <span className="bg-[#0c2922] text-[#08c794] rounded px-5">Iniciante</span>
+            <span className="bg-[#0c2922] text-[#08c794] rounded px-5">{planos.nivel}</span>
           </div>
-            <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>TimerIcons 60min</p>
+            <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>TimerIcons {planos.duracao}</p>
             <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>Usericon Carlos Dias</p>
-            <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>TreinoIcon Hipertrofia</p>
+            <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>TreinoIcon </p>
             
             <div className="flex">
                 <Link to="" 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import type Planos from "../../../models/Planos"
+import { buscar } from "../../../services/Service"
 import CardPlano from "../cardplano/CardPlano"
 
 
@@ -36,7 +37,11 @@ function ListaPlanos() {
             </span>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <CardPlano/>
+                    {
+            plano.map((plano) => (
+              <CardPlano key={plano.id} planos={plano}/>
+            ))
+        }
           </div>
         </div>
       </div>
