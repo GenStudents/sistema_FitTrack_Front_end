@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type Planos from "../../../models/Planos"
+import type Plano from "../../../models/Plano"
 import { buscar } from "../../../services/Service"
 import CardPlano from "../cardplano/CardPlano"
 
@@ -7,7 +7,7 @@ import CardPlano from "../cardplano/CardPlano"
 function ListaPlanos() {
 
    const [isLoading,setLoading] = useState<boolean>(false)
-   const [plano,setPlano] =useState<Planos[]>([])
+   const [plano,setPlano] =useState<Plano[]>([])
 
    useEffect(()=>{
     buscarPlanos()
@@ -16,7 +16,7 @@ function ListaPlanos() {
    async function buscarPlanos() {
     try{
       setLoading(true)
-      await buscar('/plano',setPlano)
+      await buscar('/planos',setPlano)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }catch(error:any){
       if(error.toString().includes('401'))
@@ -33,7 +33,7 @@ function ListaPlanos() {
         <div className="container flex flex-col">
           {(!isLoading && plano.length === 0) && (
             <span className="text-3xl text-center my-8">
-              Nenhum Tema foi encontrado!
+              Nenhum Plano foi encontrado!
             </span>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

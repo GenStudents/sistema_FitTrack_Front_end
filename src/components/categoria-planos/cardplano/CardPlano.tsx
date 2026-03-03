@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import type Planos from "../../../models/Planos";
+import type Plano from "../../../models/Plano";
 
 interface CardPlanoProps{
-  planos:Planos
+  planos:Plano
 }
 
 function CardPlanos({planos}:CardPlanoProps) {
@@ -21,7 +21,7 @@ function CardPlanos({planos}:CardPlanoProps) {
             <p className='p-3  bg-[#0e0f12]  text-[#7c7d63]'>TreinoIcon </p>
             
             <div className="flex">
-                <Link to="" 
+                <Link to={`/editarplanos/${planos.id}`} 
                     className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800 
                         flex items-center justify-center py-2'>
                     <button>Editar</button>
