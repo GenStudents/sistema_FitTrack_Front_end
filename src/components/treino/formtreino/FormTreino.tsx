@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import type { Treino } from "../../../models/Treino"
 import { buscar, cadastrar, atualizar } from "../../../services/Service"
 
 // Interface para aceitar a função de fechar o modal
@@ -12,7 +11,13 @@ export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo 
   const navigate = useNavigate()
   const { id } = useParams()
   const editando = !!id
-  const [treino, setTreino] = useState<Treino>({} as Treino)
+  const [treino, setTreino] = useState<any>({
+    nome: "",
+    duracao: 0,
+    nivel: "",
+    usuario: { id: 0 },
+    categoriaTreino: { id: 0 }
+  })
   const [usuarios, setUsuarios] = useState<any[]>([])
   const [categorias, setCategorias] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
@@ -30,17 +35,17 @@ export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo 
 
   // Busca treino específico
   async function buscarTreinoPorId() {
-    await buscar(`/treinos/${id}`, setTreino)
+    await buscar(`/planos/${id}`, setTreino)
   }
 
   // Busca todos os usuários 
   async function buscarUsuarios() {
-    await buscar("/usuarios", setUsuarios)
+    await buscar("/usuarios/all", setUsuarios)
   }
 
   // Busca todas as categorias
   async function buscarCategorias() {
-    await buscar("/categorias", setCategorias)
+    await buscar("/categorias-treino", setCategorias)
   }
 
   // Atualiza campos simples do treino (nome, duração, nível)
@@ -59,18 +64,22 @@ export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo 
     setLoading(true)
 
     // Se estiver editando → atualiza
+    try {
     if (editando) {
-      await atualizar(`/treinos`, treino, setTreino)
+      await atualizar(`/planos`, treino, setTreino)
     } 
     // Se não → cria novo
     else {
-      await cadastrar(`/treinos`, treino, setTreino)
+      await cadastrar(`/planos`, treino, setTreino)
     }
-
-    setLoading(false)
-
-    // Após salvar, redireciona para listagem
-    navigate("/treinos")
+    onClose();
+    navigate("/treinos") // redirecionar se der certo
+  } catch (error) {
+    console.error("Erro ao salvar o plano:", error);
+    alert("Erro ao salvar o treino. Verifique os campos.");
+  } finally {
+    setLoading(false);
+  }
   }
 
   return (
@@ -116,9 +125,9 @@ export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo 
             required
           >
             <option value="">Selecione</option>
-            <option value="iniciante">Iniciante</option>
-            <option value="intermediario">Intermediário</option>
-            <option value="avancado">Avançado</option>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediario">Intermediário</option>
+            <option value="Avancado">Avançado</option>
           </select>
         </div>
       </div>
@@ -163,7 +172,7 @@ export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo 
             <option value="">Selecione uma categoria</option>
             {categorias.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.nome}
+                {c.descricao}
               </option>
             ))}
           </select>

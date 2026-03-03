@@ -17,7 +17,7 @@ export default function ListarTreinos() {
 
   // Função que busca todos os treinos
   async function buscarTreinos() {
-    await buscar("/treinos", setTreinos)
+    await buscar("/planos", setTreinos)
   }
 
   // Executa quando a tela carrega
@@ -84,9 +84,9 @@ export default function ListarTreinos() {
           onChange={(e) => setNivelFiltro(e.target.value)}
         >
           <option value="">Todos os níveis</option>
-          <option value="iniciante">Iniciante</option>
-          <option value="intermediario">Intermediário</option>
-          <option value="avancado">Avançado</option>
+          <option value="Iniciante">Iniciante</option>
+          <option value="Intermediario">Intermediário</option>
+          <option value="Avancado">Avançado</option>
         </select>
       </div>
 
@@ -136,7 +136,10 @@ export default function ListarTreinos() {
                 <h2 className="text-xl font-bold text-white mb-2">Novo Plano de Treino</h2>
                 <p className="text-zinc-400 text-sm mb-8">Preencha os dados para criar um novo treino.</p>
         
-        <FormTreino onClose={() => setIsModalAberto(false)} />
+        <FormTreino onClose={() => {
+          setIsModalAberto(false);
+        buscarTreinos(); // atualizar a lista sozinha
+        }} />
             </div>
           </div>
         </div>

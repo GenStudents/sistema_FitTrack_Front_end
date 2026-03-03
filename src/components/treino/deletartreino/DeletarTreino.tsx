@@ -4,17 +4,15 @@ import type { Treino } from "../../../models/Treino"
 import { buscar, deletar } from "../../../services/Service"
 
 export default function DeletarTreino() {
-
   const navigate = useNavigate()
   const { id } = useParams()
-
   const [treino, setTreino] = useState<Treino>({} as Treino)
   const [loading, setLoading] = useState(false)
 
   // Busca o treino para mostrar informações antes de deletar
   useEffect(() => {
     async function buscarTreino() {
-      await buscar(`/treinos/${id}`, setTreino)
+      await buscar(`/planos/${id}`, setTreino)
     }
 
     if (id) {
@@ -26,11 +24,15 @@ export default function DeletarTreino() {
   async function confirmarDelete() {
     setLoading(true)
 
-    await deletar(`/treinos/${id}`)
-
-    setLoading(false)
-
-    navigate("/treinos")
+    try {
+      await deletar(`/planos/${id}`)
+      navigate("/treinos")
+    } catch (error) {
+      console.error("Erro ao deletar o plano:", error)
+      alert("Não foi possível deletar o plano de treino.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
