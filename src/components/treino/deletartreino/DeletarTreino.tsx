@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import type { Treino } from "../../../models/Treino"
 import { buscar, deletar } from "../../../services/Service"
+import { AlertTriangle, X } from "lucide-react"
 
 export default function DeletarTreino() {
   const navigate = useNavigate()
@@ -36,30 +37,38 @@ export default function DeletarTreino() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+      <div className="bg-[#121214] border border-zinc-800 w-full max-w-md rounded-2xl shadow-2xl relative overflow-hidden">
 
-      <div className="bg-zinc-900 border border-zinc-800 p-8 rounded-xl w-full max-w-md">
+        {/* Botão de fechar (X) */}
+        <button 
+          onClick={() => navigate("/treinos")}
+          className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
+        >
+          <X size={20} />
+        </button>
 
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Deletar Plano de Treino
-        </h1>
+        <div className="p-8 flex flex-col items-center text-center">
 
-        <p className="text-zinc-400 text-center mb-6">
-          Você tem certeza que deseja deletar o treino:
-        </p>
+          {/* Ícone de Alerta para feedback de erro/exclusão */}
+          <div className="mb-4 p-3 bg-red-950/30 rounded-full border border-red-500/20 text-red-500">
+            <AlertTriangle size={32} />
+          </div>
 
-        <div className="bg-zinc-800 p-4 rounded-lg text-center mb-6">
-          <p className="font-semibold">{treino.nome}</p>
-          <p className="text-sm text-zinc-400">
-            {treino.duracao} minutos
+          {/* Título do Card */}
+          <h2 className="text-xl font-bold text-white mb-2">Excluir Plano</h2>
+
+          <p className="text-zinc-400 text-sm mb-6">
+            Tem certeza que deseja excluir o plano <span className="text-white font-medium">"{treino.nome}"</span>? 
+            Esta ação não pode ser desfeita.
           </p>
-        </div>
 
-        <div className="flex gap-4 justify-center">
+        {/* Botões */}
+        <div className="flex w-full gap-3">
 
           <button
             onClick={() => navigate("/treinos")}
-            className="px-4 py-2 border border-zinc-700 rounded-lg"
+            className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
           >
             Cancelar
           </button>
@@ -67,13 +76,14 @@ export default function DeletarTreino() {
           <button
             onClick={confirmarDelete}
             disabled={loading}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition"
+            className="flex-1 px-4 py-2.5 text-sm font-medium bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
           >
-            {loading ? "Deletando..." : "Confirmar"}
+            {loading ? "Excluindo..." : "Excluir"}
           </button>
 
         </div>
       </div>
     </div>
+  </div>
   )
 }
