@@ -1,25 +1,51 @@
-import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react"
+import { FacebookLogo, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react"
 
 function Footer() {
+  return (
+    <>
+    {/* bg-background traz o fundo preto e border-border traz a linha cinza */}
+    <footer className="w-full border-t border-border bg-background py-8">
+      <div className="container mx-auto flex flex-col items-center justify-center gap-4 px-4">
+        
+        {/* Textos */}
+        <div className="text-center">
+          <p className="text-lg font-bold text-foreground tracking-tight">
+            FitTrack | Copyright © 2026
+          </p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Acesse nossas redes sociais
+          </p>
+        </div>
+        
+        {/* Ícones com efeito hover para o verde principal (primary) */}
+        <div className="flex gap-5 mt-2">
+          <a 
+            href="#" 
+            aria-label="LinkedIn" 
+            className="text-muted-foreground hover:text-primary transition-colors duration-300"
+          >
+            <LinkedinLogo size={32} weight="regular" />
+          </a>
+          <a 
+            href="#" 
+            aria-label="Instagram" 
+            className="text-muted-foreground hover:text-primary transition-colors duration-300"
+          >
+            <InstagramLogo size={32} weight="regular" />
+          </a>
+          <a 
+            href="#" 
+            aria-label="Facebook" 
+            className="text-muted-foreground hover:text-primary transition-colors duration-300"
+          >
+            <FacebookLogo size={32} weight="regular" />
+          </a>
+        </div>
 
-return (
-<>
-<div className="flex justify-center bg-indigo-900 text-white">
-<div className="container flex flex-col items-center py-4">
-<p className='text-x1 font-bold'>
-FitTrack | Copyright: 2026
-</p>
-<p className='text-1g'>Acesse nossas redes sociais</p>
-<div className='flex gap-2'>
-<LinkedinLogoIcon size={48} weight='bold' />
-<InstagramLogoIcon size={48} weight='bold' />
-<FacebookLogoIcon size={48} weight='bold' />
-</div>
-</div>
-</div>
-</>
-)
+      </div>
+    </footer>
+    </>
+  )
 }
-
 
 export default Footer
