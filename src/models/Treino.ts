@@ -1,14 +1,14 @@
 export interface Treino {
-  id?: number
-  nome: string
-  duracao: number
-  nivel: "iniciante" | "intermediario" | "avancado"
+  id?: number;
+  nome: string;
+  duracao: number;
+  nivel: "Iniciante" | "Intermediario" | "Avancado"; 
   usuario: {
-    id: number
-    nome?: string
-  }
+    id: number;
+    nome?: string;
+  };
   categoriaTreino: {
-    id: number
-    nome?: string
-  }
+    id: number;
+    descricao?: string; 
+  };
 }

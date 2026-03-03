@@ -9,16 +9,16 @@ interface CardTreinoProps {
 
 // Cores da badge por nível
 const nivelColors: Record<string, string> = {
-  iniciante: "bg-emerald-600/20 text-emerald-400",
-  intermediario: "bg-yellow-500/20 text-yellow-400",
-  avancado: "bg-red-600/20 text-red-400",
+  Iniciante: "bg-emerald-600/20 text-emerald-400",
+  Intermediario: "bg-yellow-500/20 text-yellow-400",
+  Avancado: "bg-red-600/20 text-red-400",
 }
 
 // Labels formatadas
 const nivelLabels: Record<string, string> = {
-  iniciante: "Iniciante",
-  intermediario: "Intermediário",
-  avancado: "Avançado",
+  Iniciante: "Iniciante",
+  Intermediario: "Intermediário",
+  Avancado: "Avançado",
 }
 
 export default function CardTreino({
@@ -60,7 +60,7 @@ export default function CardTreino({
 
         <div className="flex items-center gap-2">
           <LayoutGrid size={16} />
-          <span>{treino.categoriaTreino?.nome}</span>
+          <span>{treino.categoriaTreino?.descricao || "Sem categoria"}</span>
         </div>
 
       </div>
