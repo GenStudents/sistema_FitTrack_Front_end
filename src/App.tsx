@@ -1,6 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Categoria from "./pages/categoria/Categoria";
+import Navbar from "./components/navbar/Navbar";
+import DeletarPlano from "./components/categoria-planos/deletarplano/DeletarPlano";
+import FormPlano from "./components/categoria-planos/formplano/FormPlano";
+import ListaPlanos from "./components/categoria-planos/listaplanos/ListaPlanos";
+import Footer from "./components/footer/Footer";
+import DeletarTreino from "./components/treino/deletartreino/DeletarTreino";
+import FormTreino from "./components/treino/formtreino/FormTreino";
+import ListaTreinos from "./components/treino/listatreinos/ListaTreinos";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
@@ -45,7 +54,7 @@ function App() {
       
     </>
   )
-}
+
 
       </Routes>
 
