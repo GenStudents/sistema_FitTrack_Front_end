@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { buscar } from "../../services/Service"
-import type Plano from "../../models/Plano"
 import type Categoria from "../../models/Categoria"
-
+import type Plano from "../../models/Plano"
+import { buscar } from "../../services/Service"
 
 function Home() {
   const [planos, setPlanos] = useState<Plano[]>([])
@@ -14,7 +13,6 @@ function Home() {
     try {
       await buscar("/planos", setPlanos)
       await buscar("/categorias-treino", setTreinos)
-
     } catch (error) {
       console.error("Erro ao buscar dados:", error)
     } finally {
@@ -27,35 +25,36 @@ function Home() {
   }, [])
 
   return (
-    <div className="px-6 py-10 max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       {/* Título */}
-      <h1 className="text-4xl font-bold text-center mb-4">
+      <h1 className="text-4xl font-bold text-center mb-4 text-foreground tracking-tight">
         FitTrack
       </h1>
 
-      <p className="text-center text-gray-600 mb-10">
+      <p className="text-center text-muted-foreground mb-10">
         Plataforma de gerenciamento de planos e treinos fitness.
       </p>
 
       {/* Cards Resumo */}
       <div className="grid md:grid-cols-2 gap-6 mb-12">
-        <div className="bg-white shadow-md rounded-xl p-6 border">
-          <h2 className="text-xl font-semibold mb-2">Planos Cadastrados</h2>
+        {/* Usando bg-card e border-border para seguir o tema */}
+        <div className="bg-card text-card-foreground rounded-xl p-6 border border-border transition-all hover:border-primary/50">
+          <h2 className="text-xl font-semibold mb-2">Treinos Cadastrados</h2>
           {loading ? (
-            <p>Carregando...</p>
+            <p className="text-muted-foreground">Carregando...</p>
           ) : (
-            <p className="text-3xl font-bold text-blue-600">
+            <p className="text-4xl font-bold text-primary">
               {planos.length}
             </p>
           )}
         </div>
 
-        <div className="bg-white shadow-md rounded-xl p-6 border">
-          <h2 className="text-xl font-semibold mb-2">Treinos Cadastrados</h2>
+        <div className="bg-card text-card-foreground rounded-xl p-6 border border-border transition-all hover:border-primary/50">
+          <h2 className="text-xl font-semibold mb-2">Categorias</h2>
           {loading ? (
-            <p>Carregando...</p>
+            <p className="text-muted-foreground">Carregando...</p>
           ) : (
-            <p className="text-3xl font-bold text-green-600">
+            <p className="text-4xl font-bold text-primary">
               {treinos.length}
             </p>
           )}
@@ -64,14 +63,15 @@ function Home() {
 
       {/* Ações principais */}
       <div className="flex flex-col md:flex-row gap-6 justify-center">
-        <Link to="/planos">
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-            Gerenciar Planos
+        <Link to="/categorias" className="w-full md:w-auto">
+          {/* Botões usando bg-primary (verde) */}
+          <button className="w-full bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+            Gerenciar Categorias
           </button>
         </Link>
 
-        <Link to="/treinos">
-          <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+        <Link to="/treinos" className="w-full md:w-auto">
+          <button className="w-full bg-secondary text-secondary-foreground border border-border px-8 py-3 rounded-lg font-medium hover:bg-secondary/80 transition-colors">
             Gerenciar Treinos
           </button>
         </Link>
