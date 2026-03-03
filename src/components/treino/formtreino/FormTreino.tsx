@@ -3,8 +3,12 @@ import { useNavigate, useParams } from "react-router-dom"
 import type { Treino } from "../../../models/Treino"
 import { buscar, cadastrar, atualizar } from "../../../services/Service"
 
-export default function FormTreino() {
+// Interface para aceitar a função de fechar o modal
+interface FormTreinoProps {
+  onClose: () => void;
+}
 
+export default function FormTreino({ onClose }: FormTreinoProps) { // Recebendo onClose
   const navigate = useNavigate()
   const { id } = useParams()
   const editando = !!id
@@ -70,58 +74,45 @@ export default function FormTreino() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-      <div className="w-full max-w-xl p8">
-
-      {/* Título dinâmico */}
-      <h1 className="text-3xl font-bold mb-2">
-        {editando ? "Editar Plano de Treino" : "Novo Plano de Treino"}
-      </h1>
-
-      {/* Subtítulo dinâmico */}
-      <p className="text-zinc-400 mb-8">
-        {editando
-          ? "Atualize as informações do treino."
-          : "Preencha os dados para criar um novo treino."}
-      </p>
-
-      {/* Formulário principal */}
-      <form onSubmit={salvar} className="flex flex-col gap-6 max-w-xl">
+    <div className="w-full text-white">
+      <form onSubmit={salvar} className="flex flex-col gap-5">
 
         {/* Campo Nome */}
-        <div className="flex flex-col gap-2">
-          <label>Nome</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-zinc-300">Nome</label>
           <input
             type="text"
             name="nome"
+            placeholder="Ex: Treino Full Body"
             value={treino.nome || ""}
             onChange={atualizarEstado}
-            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-600 outline-none"
+            className="bg-zinc-900 border border-emerald-500/30 rounded-lg px-4 py-2 focus:border-emerald-500 outline-none transition-all"
             required
           />
         </div>
 
-        {/* Campo Duração */}
-        <div className="flex flex-col gap-2">
-          <label>Duração (min)</label>
+        {/* Duração e Nível lado a lado */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-zinc-300">Duração (min)</label>
           <input
             type="number"
             name="duracao"
             value={treino.duracao || ""}
             onChange={atualizarEstado}
-            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-600 outline-none"
+            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 focus:border-emerald-500 outline-none transition-all"
             required
           />
         </div>
 
         {/* Select Nível */}
-        <div className="flex flex-col gap-2">
-          <label>Nível</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-zinc-300">Nível</label>
           <select
             name="nivel"
             value={treino.nivel || ""}
             onChange={atualizarEstado}
-            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-600 outline-none"
+            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 focus:border-emerald-500 outline-none transition-all text-zinc-400"
             required
           >
             <option value="">Selecione</option>
@@ -130,6 +121,7 @@ export default function FormTreino() {
             <option value="avancado">Avançado</option>
           </select>
         </div>
+      </div>
 
         {/* Select Usuário */}
         <div className="flex flex-col gap-2">
@@ -178,13 +170,13 @@ export default function FormTreino() {
         </div>
 
         {/* Botões */}
-        <div className="flex gap-4 mt-4">
+        <div className="flex justify-end gap-3 mt-4">
 
           {/* Cancelar → volta para listagem */}
           <button
             type="button"
-            onClick={() => navigate("/treinos")}
-            className="px-4 py-2 border border-zinc-700 rounded-lg"
+            onClick={onClose} // isso aqui fecha o modal
+            className="px-6 py-2 text-sm font-medium text-white border border-zinc-700 hover:bg-zinc-800 rounded-lg transition-colors"
           >
             Cancelar
           </button>
@@ -192,7 +184,7 @@ export default function FormTreino() {
           {/* Salvar */}
           <button
             type="submit"
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-lg transition"
+            className="px-6 py-2 text-sm font-medium bg-emerald-500 hover:bg-emerald-600 text-black rounded-lg transition-all"
             disabled={loading}
           >
             {loading ? "Salvando..." : "Salvar"}
@@ -201,6 +193,5 @@ export default function FormTreino() {
         </div>
       </form>
       </div>
-    </div>
   )
 }
