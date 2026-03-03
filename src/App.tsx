@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import DeletarPlano from './components/categoria-planos/deletarplano/DeletarPlano';
 import FormPlano from './components/categoria-planos/formplano/FormPlano';
 import ListaPlanos from './components/categoria-planos/listaplanos/ListaPlanos';
@@ -10,33 +9,38 @@ import FormTreino from './components/treino/formtreino/FormTreino';
 import ListaTreinos from './components/treino/listatreinos/ListaTreinos';
 import Categoria from './pages/categoria/Categoria';
 import Home from './pages/home/Home';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
+
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="min-h-[80vh]">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="*" element={<Home />} />
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Navbar />
+        <div className="min-h-[80vh]">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="*" element={<Home />} />
 
-          <Route path="/planos" element={<ListaPlanos />} />
-          <Route path="/cadastrarplano" element={<FormPlano />} />
-          <Route path="/editarplanos/:id" element={<FormPlano />} />
-          <Route path="/deletarplanos/:id" element={<DeletarPlano />} />
+            <Route path="/planos" element={<ListaPlanos />} />
+            <Route path="/cadastrarplano" element={<FormPlano />} />
+            <Route path="/editarplanos/:id" element={<FormPlano />} />
+            <Route path="/deletarplanos/:id" element={<DeletarPlano />} />
 
-          <Route path="/treinos" element={<ListaTreinos />} />
-          <Route path="/cadastrartreino" element={<FormTreino />} />
-          <Route path="/editartreino/:id" element={<FormTreino />} />
-          <Route path="/deletartreino/:id" element={<DeletarTreino />} />
-          <Route path="/categorias" element={<Categoria />} />
-        </Routes>
-      </div>
+            <Route path="/treinos" element={<ListaTreinos />} />
+            <Route path="/cadastrartreino" element={<FormTreino />} />
+            <Route path="/editartreino/:id" element={<FormTreino />} />
+            <Route path="/deletartreino/:id" element={<DeletarTreino />} />
+            <Route path="/categorias" element={<Categoria />} />
+          </Routes>
+        </div>
 
-      <Footer />
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
-}
 
+}
 export default App;

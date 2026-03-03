@@ -5,6 +5,7 @@ import type Categoria from "../../../models/Categoria";
 import type Plano from "../../../models/Plano";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import type Usuario from "../../../models/Usuario";
+import { ToastAlert } from "../../../utils/ToastAlert";
 
 function FormPlano() {
 
@@ -38,11 +39,11 @@ function FormPlano() {
   async function buscarPlanoPorId(id: string) {
     try {
       await buscar(`/planos/${id}`, setplano)
-      alert("Plano encontrado com sucesso")
+      ToastAlert("Plano encontrado com sucesso", "sucesso")
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes('401'))
-        alert("Plano não encontrado")
+        ToastAlert("Plano não encontrado", "erro")
     }
   }
 
@@ -52,7 +53,7 @@ function FormPlano() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes('401'))
-        alert("Plano não encontrado")
+        ToastAlert("Plano não encontrado", "erro")
     }
   }
 
@@ -76,20 +77,20 @@ function FormPlano() {
     if (id !== undefined) {
       try {
         await atualizar(`/planos`, plano, setplano)
-        alert("Plano atualizado com sucesso")
+        ToastAlert("Plano atualizado com sucesso", "sucesso")
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         if (error.toString().includes('401'))
-          alert('Plano não encontrado')
+          ToastAlert('Plano não encontrado', "erro")
       }
     } else {
       try {
         await cadastrar(`/planos`, plano, setplano)
-        alert("Plano cadastrado com sucesso")
+        ToastAlert("Plano cadastrado com sucesso", "sucesso")
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         if (error.toString().includes('401'))
-          alert('Plano não cadastrado')
+          ToastAlert("Plano não cadastrado", "erro")
       }
     }
     setIsLoading(false)
@@ -173,4 +174,4 @@ function FormPlano() {
   )
 
 }
-export default FormPlano
+export default FormPlano;
