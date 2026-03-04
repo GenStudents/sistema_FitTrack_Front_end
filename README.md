@@ -25,8 +25,6 @@ Você pode acessar o deploy da aplicação em produção através do link:
 
 ## 3. Equipe de Colaboradores
 
-*Nota: Os nomes específicos dos colaboradores não foram listados ou referenciados no código-fonte principal ou arquivos de configuração (como `README.md` ou componentes estáticos da página) enviados nesta análise do repositório. Por favor, adicione abaixo os nomes dos membros da equipe que atuaram no desenvolvimento:*
-
 **Alissa Sousa**
 **Felipe Gonçalves**
 **Fernanda Santos**
