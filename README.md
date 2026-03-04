@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# 🏋️‍♂️ FitTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Sobre o Projeto e Produto
 
-Currently, two official plugins are available:
+O **FitTrack** é uma plataforma focada no gerenciamento de rotinas fitness, desenvolvida para facilitar o controle e a organização de planos de treino e atividades físicas. O sistema funciona como uma aplicação de página única (SPA) construída com React, TypeScript e Vite, garantindo alta performance e uma experiência fluida para os usuários.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O produto foi pensado para oferecer uma interface clara, composta por uma barra de navegação lateral (Sidebar) e um painel de visualização principal que se adapta a diferentes tamanhos de tela.
 
-## React Compiler
+### Principais Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Através do sistema de rotas da aplicação, é possível acessar módulos completos para o gerenciamento das atividades físicas:
 
-## Expanding the ESLint configuration
+* **Gestão de Planos:** Área dedicada para visualizar a lista de planos de treino disponíveis, com opções para cadastrar novos planos, além de editar e deletar registros existentes.
+* **Gestão de Treinos:** Módulo focado especificamente nos treinos, permitindo a listagem completa, criação de novas rotinas, atualização de detalhes (edição) e exclusão de treinos específicos.
+* **Categorias de Exercícios:** Funcionalidade que possibilita agrupar e organizar os treinos e planos em diferentes categorias, facilitando a busca e a navegação.
+* **Navegação e Estrutura Centralizada:** A aplicação conta com uma tela de início (`/home`) para uma visão geral e utiliza componentes globais (como `Navbar` e `Footer`) para garantir uma navegação consistente em todas as telas do sistema.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 2. Imagens do Projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Você pode acessar o deploy da aplicação em produção através do link:
+🔗 **[FitTrack - Acessar Sistema](https://fittrack-frontend-ten.vercel.app)**
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 3. Equipe de Colaboradores
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+*Nota: Os nomes específicos dos colaboradores não foram listados ou referenciados no código-fonte principal ou arquivos de configuração (como `README.md` ou componentes estáticos da página) enviados nesta análise do repositório. Por favor, adicione abaixo os nomes dos membros da equipe que atuaram no desenvolvimento:*
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Alissa Sousa**
+**Felipe Gonçalves**
+**Fernanda Santos**
+**Jessica Gizela**
+**Matheus Alan**
+**Tacila Souza**
