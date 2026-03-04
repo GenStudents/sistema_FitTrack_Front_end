@@ -25,9 +25,9 @@ Você pode acessar o deploy da aplicação em produção através do link:
 
 ## 3. Equipe de Colaboradores
 
-**Alissa Sousa**
-**Felipe Gonçalves**
-**Fernanda Santos**
-**Jessica Gizela**
-**Matheus Alan**
-**Tacila Souza**
+* **Alissa Sousa**
+* **Felipe Gonçalves**
+* **Fernanda Santos**
+* **Jessica Gizela**
+* **Matheus Alan**
+* **Tacila Souza**
